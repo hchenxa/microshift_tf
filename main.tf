@@ -40,3 +40,20 @@ data "template_file" "cloud-init" {
     node_name                  = var.cluster_name
   }
 }
+
+resource "null_resource" "microshift_installation" {
+  connection {
+    type        = "ssh"
+    host        = aws_instance.microshift_node.public_ip
+    user        = "ec2-user"
+    private_key = file(var.ssh_private_key_path)
+  }
+
+  # Check for cloud-init file to be created
+  provisioner "remote-exec" {
+    inline = [
+      "while [ ! -f /home/ec2-user/cloud-init-complete ]; do echo WAITING FOR NODES TO UPDATE...; sleep 30; done"
+    ]
+    on_failure = continue
+  }
+}

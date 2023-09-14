@@ -27,3 +27,5 @@ sudo sed -i "s/#baseDomain: microshift.example.com/baseDomain: ${aws_base_dns_do
 # Start the microshift
 sudo systemctl start microshift
 sudo systemctl enable microshift
+
+touch /home/ec2-user/cloud-init-complete
