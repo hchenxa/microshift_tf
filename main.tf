@@ -25,3 +25,16 @@ resource "aws_key_pair" "default" {
   key_name   = "${local.cluster_id}_ssh_key"
   public_key = file(var.ssh_public_key_path)
 }
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#   INSTANCE INITIALIZATION SCRIPT   #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Cloud-Init script to register and update nodes
+data "template_file" "cloud-init" {
+  template = file("./cloud-init.sh")
+  vars = {
+    rh_subscription_username   = var.rh_subscription_username
+    rh_subscription_password   = var.rh_subscription_password
+    openshift_image_pullsecret = var.openshift_image_pullsecret
+  }
+}

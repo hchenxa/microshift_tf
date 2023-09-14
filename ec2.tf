@@ -30,7 +30,6 @@ resource "aws_instance" "microshift_node" {
   subnet_id     = aws_subnet.microshift_public_subnet.id
   vpc_security_group_ids = [
     aws_security_group.microshift_sg_ssh.id,
-    aws_security_group.microshift_vpc.id
   ]
   associate_public_ip_address = true
 
@@ -48,26 +47,10 @@ resource "aws_instance" "microshift_node" {
     host        = self.public_ip
   }
 
+  user_data = data.template_file.cloud-init.rendered
+
   provisioner "file" {
-    content     = file(var.ssh_private_key_path)
-    destination = "~/.ssh/id_rsa"
+    content     = file(var.openshift_image_pullsecret)
+    destination = "/tmp/openshift-pull-secret"
   }
-  # user_data = data.template_file.cloud-init.rendered
-
-  # connection {
-  #   type        = "ssh"
-  #   user        = "ec2-user"
-  #   private_key = file(var.ssh_private_key_path)
-  #   host        = self.public_ip
-  # }
-
-  # provisioner "file" {
-  #   content     = data.template_file.inventory.rendered
-  #   destination = "~/inventory.yaml"
-  # }
-
-  # provisioner "file" {
-  #   content     = file(var.ssh_private_key_path)
-  #   destination = "~/.ssh/id_rsa"
-  # }
 }

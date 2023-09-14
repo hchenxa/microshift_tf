@@ -35,17 +35,18 @@ variable "ssh_public_key_path" {
   default     = "~/.ssh/id_rsa.pub"
 }
 
-# variable "rh_subscription_username" {
-#   description = "Red Hat Network login username for registration system of the OpenShift Container Platform cluster"
-# }
+variable "rh_subscription_username" {
+  description = "Red Hat Network login username for registration system of the OpenShift Container Platform cluster"
+}
 
-# variable "rh_subscription_password" {
-#   description = "Red Hat Network login password for registration system of the OpenShift Container Platform cluster"
-# }
+variable "rh_subscription_password" {
+  description = "Red Hat Network login password for registration system of the OpenShift Container Platform cluster"
+}
 
-# variable "rh_subscription_pool_id" {
-#   description = "Red Hat subscription pool id for OpenShift Container Platform"
-# }
+variable "openshift_image_pullsecret" {
+  type        = string
+  description = "Path to the OpenShift image pull secret"
+}
 
 data "aws_availability_zones" "zones" {}
 
