@@ -47,10 +47,10 @@ resource "aws_instance" "microshift_node" {
     host        = self.public_ip
   }
 
-  user_data = data.template_file.cloud-init.rendered
-
   provisioner "file" {
     content     = file(var.openshift_image_pullsecret)
     destination = "/tmp/openshift-pull-secret"
   }
+
+  user_data = data.template_file.cloud-init.rendered
 }

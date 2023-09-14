@@ -36,5 +36,7 @@ data "template_file" "cloud-init" {
     rh_subscription_username   = var.rh_subscription_username
     rh_subscription_password   = var.rh_subscription_password
     openshift_image_pullsecret = var.openshift_image_pullsecret
+    aws_base_dns_domain        = var.aws_base_dns_domain
+    node_name                  = var.cluster_name
   }
 }

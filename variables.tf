@@ -18,10 +18,10 @@ variable "aws_region" {
   description = "AWS region to deploy resources"
 }
 
-# variable "aws_base_dns_domain" {
-#   type        = string
-#   description = "Base public DNS domain under which to create resources"
-# }
+variable "aws_base_dns_domain" {
+  type        = string
+  description = "Base public DNS domain under which to create resources"
+}
 
 variable "ssh_private_key_path" {
   type        = string
