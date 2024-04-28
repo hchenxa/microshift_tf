@@ -3,6 +3,12 @@ variable "cluster_name" {
   description = "Name of the cluster"
 }
 
+variable "ocp_version" {
+  type        = string
+  description = "Version of the cluster"
+  default     = "4.14"
+}
+
 variable "aws_access_key_id" {
   type        = string
   description = "AWS Access Key ID"
