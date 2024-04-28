@@ -38,6 +38,7 @@ data "template_file" "cloud-init" {
     openshift_image_pullsecret = var.openshift_image_pullsecret
     aws_base_dns_domain        = var.aws_base_dns_domain
     node_name                  = var.cluster_name
+    ocp_version                = var.ocp_version
   }
 }
 
